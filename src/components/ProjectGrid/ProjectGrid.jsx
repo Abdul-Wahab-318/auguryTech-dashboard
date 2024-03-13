@@ -1,25 +1,25 @@
 import React , {useEffect , useState} from 'react'
 import CustomDataGrid from '../CustomDataGrid/CustomDataGrid.jsx'
-import { getTeam } from '../../api/api.js'
+import { getProjects } from '../../api/api.js'
 import CustomButton from '../CustomButton/CustomButton.jsx'
-import UpdateEmployeeModal from '../UpdateEmployeeModal/UpdateEmployeeModal.jsx'
+import UpdateProjectModal from '../UpdateProjectModal/UpdateProjectModal.jsx'
 
 
-export default function TeamGrid() {
+export default function ProjectGrid() {
 
     const [rows , setRows] = useState([])
 
     const columns = [
         { field: '_id', headerName: 'ID', flex: 1},
         {
-          field: 'name',
-          headerName: 'Name',
+          field: 'title',
+          headerName: 'Title',
           flex: 1,
           editable: false,
         },
         {
-          field: 'title',
-          headerName: 'Title',
+          field: 'subtitle',
+          headerName: 'Sub Title',
           flex: 1,
           editable: false,
         },
@@ -34,7 +34,7 @@ export default function TeamGrid() {
                 return ( 
                   <>
                     <CustomButton onClick={(e)=>setOpen(state=>!state)}>Edit</CustomButton> 
-                    <UpdateEmployeeModal open={open} setOpen={setOpen} setRows={setRows} employee={params.row} />
+                    <UpdateProjectModal open={open} setOpen={setOpen} setRows={setRows} project={params.row} />
                   </>
               )
             }
@@ -49,9 +49,9 @@ export default function TeamGrid() {
         }
     ]
     
-    const fetchTeam = async () => {
+    const fetchProjects = async () => {
         try{
-            let data = await getTeam()
+            let data = await getProjects()
             setRows(data)
         }
         catch(err)
@@ -61,12 +61,12 @@ export default function TeamGrid() {
     }
 
     useEffect(() => { 
-        fetchTeam()
+        fetchProjects()
     },[])
 
-  if ( rows.length === 0)
+  if ( rows?.length === 0)
 
-    return <h1 className='fs-2 text-center'>No Employees Found</h1>
+    return <h1 className='fs-2 text-center'>No Projects Found</h1>
 
   return (
     <>

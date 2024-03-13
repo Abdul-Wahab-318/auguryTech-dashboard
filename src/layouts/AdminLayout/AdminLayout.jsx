@@ -31,12 +31,7 @@ const adminlinks = [
   {
     label : 'Projects' ,
     path : '/admin/projects'
-  } ,
-  {
-    label : 'Project Categories' ,
-    path : '/admin/categories'
-  }
-  
+  } 
 ]
 
 
